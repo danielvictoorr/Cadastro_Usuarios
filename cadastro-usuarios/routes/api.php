@@ -15,11 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::post('/user', function (Request $request) {
     return (new Users)->createUser($request);
 });
 
+
+Route::get('/user', function (Request $request) {
+    return (new Users)->getAllUsers($request);
+});
+
+Route::put('/user', function (Request $request) {
+    return (new Users)->updateUser($request);
+});

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
+use PHPUnit\Framework\MockObject\Stub\ReturnSelf;
 
 class User extends Authenticatable
 {
@@ -46,10 +47,27 @@ class User extends Authenticatable
 
     public function createUser(object $request)
     {
-        DB::table('contatos')->insert([
+        DB::table('usuarios')->insert([
             'nome' => $request->name,
             'telefone' => $request->phone,
             'email' => $request->email,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        return true;
+    }
+
+    public function allUsers()
+    {
+        return DB::table('usuarios')->get();
+    }
+
+    public function updateUser(object $request)
+    {
+        DB::table('usuarios')->where('id', $request->id)->update([
+            'nome' => $request->name,
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         return true;

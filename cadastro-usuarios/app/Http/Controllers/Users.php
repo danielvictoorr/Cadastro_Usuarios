@@ -29,4 +29,35 @@ class Users extends Controller
 
         return response()->json(['message' => 'Usário criado com sucesso.'], 201);
     }
+
+    public function getAllUsers()
+    {
+        $users = (new User)->allUsers();
+
+        return response()->json($users);
+    }
+
+    public function updateUser(object $request)
+     {
+        if(empty($request))
+        {
+            return response()->json(['message' => 'O nome,email ou telefone deve ser informado.'], 400);
+        }
+
+        if(empty($request->id))
+        {
+            return response()->json(['message' => 'O id deve ser informado.'], 400);
+        }
+
+        $updateUsers = (new User);
+
+        $user = $updateUsers->updateUser($request);
+
+        if(!$user)
+        {
+            return response()->json(['message' => 'Ocorreu um erro ao atualizar o usuário.'], 500);
+        }
+
+        return response()->json(['message' => 'Usário atualizado com sucesso.'], 200);
+     }
 }
