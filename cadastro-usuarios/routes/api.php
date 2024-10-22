@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Login;
 use App\Http\Controllers\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +31,8 @@ Route::get('/user', function (Request $request) {
 
 Route::put('/user', function (Request $request) {
     return (new Users)->updateUser($request);
+});
+
+Route::post('/createLogin', function (Request $request) {
+    return (new Login)->login($request);
 });

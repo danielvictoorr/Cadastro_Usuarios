@@ -17,5 +17,12 @@ class Login extends Controller
 
         $login = new Login();
 
+        $user = $login->createLogin($request->login, $request->password);
+
+        if(!$user) {
+            return response()->json(['message' => 'Ocorreu um erro ao criar o login.'], 500);
+        }
+
+        return response()->json(['message' => 'Login criado com sucesso.'], 200);
     }
 }
