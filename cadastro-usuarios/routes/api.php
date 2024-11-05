@@ -34,5 +34,9 @@ Route::put('/user', function (Request $request) {
 });
 
 Route::post('/createLogin', function (Request $request) {
+    return (new Login)->createLogin($request);
+});
+
+Route::post('/login', function (Request $request) {
     return (new Login)->login($request);
 });
